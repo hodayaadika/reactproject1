@@ -1,10 +1,13 @@
 //import React from "react";
 import React, { useState } from "react";
 import Keyboard from "./components/Keyboard";
+import Language from "./components/Language";
+import EditKey from "./components/EditKey";
+
 const enKeyboard = [
   "a",
   "b",
-  "C",
+  "c",
   "d",
   "e",
   "f",
@@ -32,7 +35,7 @@ const enKeyboard = [
   "?",
 ];
 
-const hekeyboard = [
+const heKeyboard = [
   "א",
   "ב",
   "ג",
@@ -59,18 +62,58 @@ const hekeyboard = [
   "!",
   "?",
 ];
+const ENkeyboard = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "W",
+  "X",
+  "Y",
+  "Z",
+  "/",
+  "!",
+  "?",
+];
 
 function App1() {
   const [text, setText] = useState("");
+
   const displayText = (char) => {
     setText(text + char);
   };
+  const [language, setLanguage] = useState(heKeyboard);
+  const ChangeLanguage = (lan) => {
+    console.log("lan: ", lan);
+    setLanguage(lan);
+  };
+  const ChangePosition = (pos) => {
+    pos === "upper" ? setLanguage(ENkeyboard) : setLanguage(enKeyboard);
+  };
+
   return (
     <>
       <h1>our keyboard!</h1>
       <p>{text}</p>
-      <div id=" keyboard">
-        {enKeyboard.map((item, i) => (
+      <div id="keyboard">
+        {language.map((item, i) => (
           <Keyboard
             displayText={displayText}
             id={i + 1}
@@ -78,6 +121,17 @@ function App1() {
             thisChar={item}
           />
         ))}
+      </div>
+      <div id="language">
+        <Language
+          ChangeLanguage={ChangeLanguage}
+          he={heKeyboard}
+          en={enKeyboard}
+          EN={ENkeyboard}
+        />
+      </div>
+      <div id="edit">
+        <EditKey ChangePosition={ChangePosition} />
       </div>
     </>
   );
