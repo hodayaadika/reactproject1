@@ -1,4 +1,10 @@
 function Keyboard(props) {
-  return <button>{props.thisChar}</button>;
+  return (
+    <>
+      <button onClick={() => props.displayText(props.thisChar)}>
+        {props.thisChar}
+      </button>
+    </>
+  );
 }
 export default Keyboard;

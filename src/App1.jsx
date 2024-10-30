@@ -61,14 +61,22 @@ const hekeyboard = [
 ];
 
 function App1() {
-  // const [language, setLanguage]=useState(enKeyboard);
-
+  const [text, setText] = useState("");
+  const displayText = (char) => {
+    setText(text + char);
+  };
   return (
     <>
       <h1>our keyboard!</h1>
+      <p>{text}</p>
       <div id=" keyboard">
         {enKeyboard.map((item, i) => (
-          <Keyboard id={i + 1} key={`CharNum${i + 1}`} thisChar={item} />
+          <Keyboard
+            displayText={displayText}
+            id={i + 1}
+            key={`CharNum${i + 1}`}
+            thisChar={item}
+          />
         ))}
       </div>
     </>
