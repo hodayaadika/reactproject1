@@ -147,11 +147,10 @@ function App1() {
     setStyle((style) => ({ ...style, fontFamily: newFontStyle }));
   };
 
-  const [text, setText] = useState([]);
+  const [text, setText] = useState([<br />]);
 
   const displayText = (char) => {
     let newSpan = <span style={style}>{char}</span>;
-    console.log("char: ", char);
     setText((text) => [...text, newSpan]);
   };
 
@@ -161,7 +160,7 @@ function App1() {
   };
 
   const reset = () => {
-    setText([]);
+    setText([<br />]);
   };
 
   const space = () => {

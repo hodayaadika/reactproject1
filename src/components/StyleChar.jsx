@@ -1,5 +1,7 @@
 function StyleChar(props) {
   const colors = [
+    "pink",
+    "brown",
     "red",
     "orange",
     "yellow",
