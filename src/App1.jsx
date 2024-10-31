@@ -6,7 +6,12 @@ import EditKey from "./components/EditKey";
 import StyleChar from "./components/StyleChar";
 
 const enKeyboard = [
-  "a","b","c","d","e","f",
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
   "g",
   "h",
   "i",
@@ -95,47 +100,48 @@ const ENkeyboard = [
   "?",
 ];
 function App1() {
-
-  const [fontSize, setFontSize]=useState(50);
-  const changeFont=(size)=>{
+  const [fontSize, setFontSize] = useState(50);
+  const changeFont = (size) => {
     setFontSize(size);
-       
-  }
-  const [color,setColor]=useState("black")
-  const changeColor=(newColor)=>{
+  };
+  const [color, setColor] = useState("black");
+  const changeColor = (newColor) => {
     setColor(newColor);
-
-  }
-
+  };
 
   const [text, setText] = useState([]);
 
   const displayText = (char) => {
-    let newSpan= <span style={{fontSize:fontSize, color:color}}>{char}</span>
-    console.log('char: ', char);
-    setText(text=>[...text , newSpan]);
-
-
+    let newSpan = (
+      <span style={{ fontSize: fontSize, color: color }}>{char}</span>
+    );
+    console.log("char: ", char);
+    setText((text) => [...text, newSpan]);
   };
 
-  const deleteChar=()=>{
-    let newText= [...text];
-    setText(newText.slice(0,-1));
+  const deleteChar = () => {
+    let newText = [...text];
+    setText(newText.slice(0, -1));
   };
 
-  const reset=()=>{
+  const reset = () => {
     setText([]);
-  }
-
-  const space=()=>{
-    let newSpan= <span>  </span>
-    setText(text=>[...text , newSpan]);
   };
-  const enter=()=>{
-    let newSpan= <span> <br /> </span>
-    setText(text=>[...text , newSpan]);
-  }
-  
+
+  const space = () => {
+    let newSpan = <span> </span>;
+    setText((text) => [...text, newSpan]);
+  };
+  const enter = () => {
+    let newSpan = (
+      <span>
+        {" "}
+        <br />{" "}
+      </span>
+    );
+    setText((text) => [...text, newSpan]);
+  };
+
   const [language, setLanguage] = useState(heKeyboard);
   const ChangeLanguage = (lan) => {
     console.log("lan: ", lan);
@@ -144,8 +150,6 @@ function App1() {
   const ChangePosition = (pos) => {
     pos === "upper" ? setLanguage(ENkeyboard) : setLanguage(enKeyboard);
   };
-
-  
 
   return (
     <>
@@ -161,30 +165,23 @@ function App1() {
           />
         ))}
       </div>
-      
-      <div id="edit">
-        <EditKey ChangePosition={ChangePosition}
+
+      <EditKey
+        ChangePosition={ChangePosition}
         deleteChar={deleteChar}
         space={space}
         reset={reset}
-        enter={enter}/>
-        <div id="language">
-        <Language
-          ChangeLanguage={ChangeLanguage}
-          he={heKeyboard}
-          en={enKeyboard}
-          EN={ENkeyboard}
-        />
-      </div>
-        <div id="fontStyle">
-        <StyleChar 
-        changeFont={changeFont}
-        changeColor={changeColor}
-        />
-        </div>
-      </div>
+        enter={enter}
+      />
 
-      
+      <Language
+        ChangeLanguage={ChangeLanguage}
+        he={heKeyboard}
+        en={enKeyboard}
+        EN={ENkeyboard}
+      />
+
+      <StyleChar changeFont={changeFont} changeColor={changeColor} />
     </>
   );
 }
