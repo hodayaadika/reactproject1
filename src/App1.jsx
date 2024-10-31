@@ -147,7 +147,7 @@ function App1() {
     setStyle((style) => ({ ...style, fontFamily: newFontStyle }));
   };
 
-  const [text, setText] = useState([<br />]);
+  const [text, setText] = useState([]);
 
   const displayText = (char) => {
     let newSpan = <span style={style}>{char}</span>;
@@ -160,7 +160,7 @@ function App1() {
   };
 
   const reset = () => {
-    setText([<br />]);
+    setText([]);
   };
 
   const space = () => {
@@ -186,8 +186,13 @@ function App1() {
 
   return (
     <>
-      <h1>our keyboard!</h1>
-      <pre>{text}</pre>
+      <h1>Our keyboard:</h1>
+      <pre>
+        <span>
+          <br />
+        </span>
+        {text}
+      </pre>
       <div id="keyboard">
         {language.map((item, i) => (
           <Keyboard

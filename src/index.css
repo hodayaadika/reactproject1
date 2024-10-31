@@ -5,7 +5,6 @@
 }
 :root {
   width: 50vw;
-
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   width: 100vw;
   line-height: 1.5;
@@ -50,15 +49,18 @@ body {
   color: white;
   font-weight: bold;
   height: 50px;
+  font-size: larger;
+  font-family: sans-serif;
 }
 pre {
   background-color: white;
-
   border: 2px solid black;
   margin-bottom: 2%;
 }
 
 h1 {
+  color: rgb(7, 83, 93);
+
   font-size: 3.2em;
   line-height: 1.1;
 }
@@ -79,7 +81,8 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border: 2px #646cff solid;
+  background-color: rgb(208, 228, 255);
 }
 button:focus,
 button:focus-visible {
