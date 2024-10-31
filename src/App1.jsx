@@ -5,12 +5,7 @@ import Language from "./components/Language";
 import EditKey from "./components/EditKey";
 
 const enKeyboard = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
+  "a","b","c","d","e","f",
   "g",
   "h",
   "i",
@@ -58,6 +53,11 @@ const heKeyboard = [
   "ר",
   "ש",
   "ת",
+  "ץ",
+  "ם",
+  "ף",
+  "ן",
+  "ך",
   "/",
   "!",
   "?",
@@ -99,6 +99,19 @@ function App1() {
   const displayText = (char) => {
     setText(text + char);
   };
+
+  const deleteChar=()=>{
+    setText(text.replace(text[text.length-1],""));
+  };
+  const reset=()=>{
+    setText("");
+  }
+
+  const space=()=>{
+    const newtext = text+ " ";
+    setText(newtext);
+  };
+
   const [language, setLanguage] = useState(heKeyboard);
   const ChangeLanguage = (lan) => {
     console.log("lan: ", lan);
@@ -122,7 +135,14 @@ function App1() {
           />
         ))}
       </div>
-      <div id="language">
+      
+      <div id="edit">
+        <EditKey ChangePosition={ChangePosition}
+        deleteChar={deleteChar}
+        space={space}
+        reset={reset}/>
+        <div id="language">
+          <h3>Choose language:</h3>
         <Language
           ChangeLanguage={ChangeLanguage}
           he={heKeyboard}
@@ -130,9 +150,10 @@ function App1() {
           EN={ENkeyboard}
         />
       </div>
-      <div id="edit">
-        <EditKey ChangePosition={ChangePosition} />
+        
       </div>
+
+      
     </>
   );
 }
