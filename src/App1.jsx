@@ -1,4 +1,3 @@
-//import React from "react";
 import React, { useState } from "react";
 import Keyboard from "./components/Keyboard";
 import Language from "./components/Language";
@@ -35,8 +34,17 @@ const enKeyboard = [
   "/",
   "!",
   "?",
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  0,
 ];
-
 const heKeyboard = [
   "א",
   "ב",
@@ -68,6 +76,16 @@ const heKeyboard = [
   "/",
   "!",
   "?",
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  0,
 ];
 const ENkeyboard = [
   "A",
@@ -98,23 +116,41 @@ const ENkeyboard = [
   "/",
   "!",
   "?",
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  0,
 ];
+
 function App1() {
-  const [fontSize, setFontSize] = useState(50);
+  const [style, setStyle] = useState({
+    fontSize: 50,
+    color: "black",
+    fontFamily: "Arial",
+  });
+
   const changeFont = (size) => {
-    setFontSize(size);
+    setStyle((style) => ({ ...style, fontSize: size }));
   };
-  const [color, setColor] = useState("black");
+
   const changeColor = (newColor) => {
-    setColor(newColor);
+    setStyle((style) => ({ ...style, color: newColor }));
+  };
+
+  const changeFontStyle = (newFontStyle) => {
+    setStyle((style) => ({ ...style, fontFamily: newFontStyle }));
   };
 
   const [text, setText] = useState([]);
 
   const displayText = (char) => {
-    let newSpan = (
-      <span style={{ fontSize: fontSize, color: color }}>{char}</span>
-    );
+    let newSpan = <span style={style}>{char}</span>;
     console.log("char: ", char);
     setText((text) => [...text, newSpan]);
   };
@@ -135,8 +171,7 @@ function App1() {
   const enter = () => {
     let newSpan = (
       <span>
-        {" "}
-        <br />{" "}
+        <br />
       </span>
     );
     setText((text) => [...text, newSpan]);
@@ -144,17 +179,16 @@ function App1() {
 
   const [language, setLanguage] = useState(heKeyboard);
   const ChangeLanguage = (lan) => {
-    console.log("lan: ", lan);
     setLanguage(lan);
   };
-  const ChangePosition = (pos) => {
-    pos === "upper" ? setLanguage(ENkeyboard) : setLanguage(enKeyboard);
+  const ChangePosition = (status) => {
+    status === "upper" ? setLanguage(ENkeyboard) : setLanguage(enKeyboard);
   };
 
   return (
     <>
       <h1>our keyboard!</h1>
-      <p>{text}</p>
+      <pre>{text}</pre>
       <div id="keyboard">
         {language.map((item, i) => (
           <Keyboard
@@ -181,7 +215,11 @@ function App1() {
         EN={ENkeyboard}
       />
 
-      <StyleChar changeFont={changeFont} changeColor={changeColor} />
+      <StyleChar
+        changeFont={changeFont}
+        changeColor={changeColor}
+        changeFontStyle={changeFontStyle}
+      />
     </>
   );
 }
