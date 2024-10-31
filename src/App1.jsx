@@ -14,6 +14,7 @@ const enKeyboard = [
   "k",
   "l",
   "m",
+  "n",
   "o",
   "g",
   "q",
@@ -93,20 +94,24 @@ const ENkeyboard = [
   "!",
   "?",
 ];
-
 function App1() {
 
   const [fontSize, setFontSize]=useState(50);
   const changeFont=(size)=>{
-    
     setFontSize(size);
        
   }
+  const [color,setColor]=useState("black")
+  const changeColor=(newColor)=>{
+    setColor(newColor);
+
+  }
+
 
   const [text, setText] = useState([]);
 
   const displayText = (char) => {
-    let newSpan= <span style={{fontSize:fontSize}}>{char}</span>
+    let newSpan= <span style={{fontSize:fontSize, color:color}}>{char}</span>
     console.log('char: ', char);
     setText(text=>[...text , newSpan]);
 
@@ -123,9 +128,13 @@ function App1() {
   }
 
   const space=()=>{
-    let newSpan= <span style={{fontSize:fontSize}}>  </span>
+    let newSpan= <span>  </span>
     setText(text=>[...text , newSpan]);
   };
+  const enter=()=>{
+    let newSpan= <span> <br /> </span>
+    setText(text=>[...text , newSpan]);
+  }
   
   const [language, setLanguage] = useState(heKeyboard);
   const ChangeLanguage = (lan) => {
@@ -157,7 +166,8 @@ function App1() {
         <EditKey ChangePosition={ChangePosition}
         deleteChar={deleteChar}
         space={space}
-        reset={reset}/>
+        reset={reset}
+        enter={enter}/>
         <div id="language">
         <Language
           ChangeLanguage={ChangeLanguage}
@@ -169,6 +179,7 @@ function App1() {
         <div id="fontStyle">
         <StyleChar 
         changeFont={changeFont}
+        changeColor={changeColor}
         />
         </div>
       </div>
