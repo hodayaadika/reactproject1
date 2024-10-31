@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Keyboard from "./components/Keyboard";
 import Language from "./components/Language";
 import EditKey from "./components/EditKey";
+import StyleChar from "./components/StyleChar";
 
 const enKeyboard = [
   "a","b","c","d","e","f",
@@ -94,24 +95,38 @@ const ENkeyboard = [
 ];
 
 function App1() {
-  const [text, setText] = useState("");
+
+  const [fontSize, setFontSize]=useState(50);
+  const changeFont=(size)=>{
+    
+    setFontSize(size);
+       
+  }
+
+  const [text, setText] = useState([]);
 
   const displayText = (char) => {
-    setText(text + char);
+    let newSpan= <span style={{fontSize:fontSize}}>{char}</span>
+    console.log('char: ', char);
+    setText(text=>[...text , newSpan]);
+
+
   };
 
   const deleteChar=()=>{
-    setText(text.replace(text[text.length-1],""));
+    let newText= [...text];
+    setText(newText.slice(0,-1));
   };
+
   const reset=()=>{
-    setText("");
+    setText([]);
   }
 
   const space=()=>{
-    const newtext = text+ " ";
-    setText(newtext);
+    let newSpan= <span style={{fontSize:fontSize}}>  </span>
+    setText(text=>[...text , newSpan]);
   };
-
+  
   const [language, setLanguage] = useState(heKeyboard);
   const ChangeLanguage = (lan) => {
     console.log("lan: ", lan);
@@ -120,6 +135,8 @@ function App1() {
   const ChangePosition = (pos) => {
     pos === "upper" ? setLanguage(ENkeyboard) : setLanguage(enKeyboard);
   };
+
+  
 
   return (
     <>
@@ -142,7 +159,6 @@ function App1() {
         space={space}
         reset={reset}/>
         <div id="language">
-          <h3>Choose language:</h3>
         <Language
           ChangeLanguage={ChangeLanguage}
           he={heKeyboard}
@@ -150,7 +166,11 @@ function App1() {
           EN={ENkeyboard}
         />
       </div>
-        
+        <div id="fontStyle">
+        <StyleChar 
+        changeFont={changeFont}
+        />
+        </div>
       </div>
 
       

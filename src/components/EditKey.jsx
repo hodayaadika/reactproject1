@@ -7,6 +7,8 @@ function EditKey(props) {
      <button onClick={()=>props.deleteChar()}>delete</button>
       <button onClick={()=>props.space()}>space</button>
       <button onClick={()=>props.reset()}>reset</button>
+      <br />
+      
        </>
   );
 }
